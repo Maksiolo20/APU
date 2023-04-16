@@ -1,0 +1,16 @@
+> library("neuralnet")
+> cena1 <- log(lodowki$cena)
+> cena1
+> lodowki <- lodowki[,-5]
+> lodowki <- lodowki[,-1]
+> lodowki
+> pojemnosc_chlodziarki1 <- log(lodowki$pojemnosc_uzytkowa_chlodziarki)
+> pojemnosc_chlodziarki1
+> pojemnosc_zamrazarki1 <- log(lodowki$pojemnosc_uzytkowa_zamrazarki)
+> pojemnosc_zamrazarki1
+> lodowki <-cbind(lodowki,cena1,pojemnosc_chlodziarki1,pojemnosc_zamrazarki1)
+> lodowki
+> net.price <-neuralnet(cena1~pojemnosc_chlodziarki1+pojemnosc_zamrazarki1,lodowki,hidden=c(3,2),threshold = 0.01)
+> plot(net.price)
+
+> save.image("C:/Users/MaksioloLaptop/Desktop/mgr/APU/lab3/zadanie2/Lab3_2.RData")
