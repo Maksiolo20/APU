@@ -1,0 +1,23 @@
+> install.packages("mlr")
+> install.packages("C:/Users/***/Desktop/mgr/APU/lab5/5_2/DiscriMiner_0.1-29.tar.gz", repos=NULL, type='source')
+> library("DiscriMiner")
+> install.packages("rFerns")
+> library("rFerns")
+> normalize <- function(x)
++ {
++     return((x-min(x))/(max(x)-min(x)))
++ }
+> data <- read.csv("C:/Users/***/Desktop/mgr/APU/lab5/5_2/lodowki.csv")
+> data$ocena_klientow<-factor(data$ocena_klientow)
+> data$poj_chlodziarki<-normalize(data$poj_chlodziarki)
+> data$poj_zamrazarki<-normalize(data$poj_zamrazarki)
+> framedData<-data.frame(data)
+> zadanie=makeClassifTask(id='lodowki',
++                         framedData,
++                         "ocena_klientow",
++                         weights = NULL,
++                         blocking = NULL,
++                         coordinates = NULL,
++                         positive=NA_character_,
++                         fixup.data = "warn",
++                         check.data = TRUE)

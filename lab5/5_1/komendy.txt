@@ -1,0 +1,8 @@
+> library("C50")
+> library("MASS")
+> data("Aids2")
+> head(Aids2)
+> treeModel <- C5.0(x=Aids2[,-6],y=Aids2$T.categ)
+> summary(treeModel)
+> plot(treeModel)
+> save.image("C:/Users/MaksioloLaptop/Desktop/mgr/APU/lab5/5_1/Lab5_1.RData")
