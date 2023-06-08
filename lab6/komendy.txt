@@ -1,0 +1,34 @@
+> install.packages("tensorflow")
+> library(tensorflow)
+> install_tensorflow()
+> install.packages("keras")
+> libary(keras)
+> install_keras()
+
+> fashionMnist <- dataset_fashion_mnist()
+> X_train <-fashionMnist$train$x
+> X_test <- fashionMnist$test$x
+> Y_train <- fashionMnist$train$y
+> Y_test <- fashionMnist$test$y
+
+> X_train_norm <- X_train/255
+> X_test_norm <- X_test/255
+
+> Y_train_class <- to_categorical(Y_train,num_classes = 100)
+> Y_test_class <- to_categorical(Y_test,num_classes = 100)
+
+> model <- keras_model_sequential() %>%
++     layer_flatten(input_shape = c(32,32,3)) %>%
++     layer_dense(units=128,activation = "relu")%>%
++     layer_dense(units=100,activation = "softmax")
+> summary(model)
+
+> model %>% compile(
++     loss = "categorical_crossentropy",
++     optimizer = optimizer_adam(),
++     metrics=c("accuracy")
++ )
+
+> model %>% evaluate(X_test_norm,Y_test_class)
+
+> model %>% predict(X_test_norm) %>% k_argmin()
